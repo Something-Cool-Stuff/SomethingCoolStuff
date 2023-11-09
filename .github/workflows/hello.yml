@@ -1,0 +1,12 @@
+name: Hello
+on: 
+  push:
+    branches:
+      - CI_Hello
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: HelloWorld
+        run: echo "hello world" 
+#        uses: action/checkout@v3
