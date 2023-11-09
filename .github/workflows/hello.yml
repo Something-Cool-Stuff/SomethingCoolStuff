@@ -8,5 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: HelloWorld
-        run: echo "hello world" 
+        run: echo ${{ secrets.GITHUB_TOKEN }}
 #        uses: action/checkout@v3
