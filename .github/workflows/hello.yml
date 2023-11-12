@@ -1,13 +1,24 @@
 name: Hello
 env:
   project_key: "mcyazvat_SomethingCoolStuff"
-  branch_name: "dev"
+  branch_name: "CD"
   api_url: "https://sonarcloud.io/api/qualitygates/project_status"
 on: 
   push:
     branches:
-      - dev
+      - CD
 jobs:
+  CD:
+    name: createImageNginx
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: createImage
+        run: |
+          pwd
+          ll
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
