@@ -6,7 +6,7 @@ env:
 on: 
   push:
     branches:
-      - "${branch_name}"
+      - ${branch_name}
 jobs:
   sonarcloud:
     name: SonarCloud
