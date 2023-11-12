@@ -6,7 +6,7 @@ env:
 on: 
   push:
     branches:
-      - ${{ env.branch_name }}
+      - dev
 jobs:
   sonarcloud:
     name: SonarCloud
@@ -22,6 +22,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: SonarCloud Status
         run: |
+          echo ${{ env.branch_name }}
           sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
           status=$(echo $sonar_response | jq -r '.projectStatus.status')
           if [ "$status" = "OK" ] || [ "$status" = "WARN" ] ; then
