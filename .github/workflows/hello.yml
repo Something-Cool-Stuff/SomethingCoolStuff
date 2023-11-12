@@ -23,7 +23,8 @@ jobs:
           COPY ./front/index.html /usr/share/nginx/html/index.html' > dockerfile
           ls -l
           cat dockerfile
-          docker build -t scsNginx:latest .
+          docker build -t scsnginx:latest .
+          ls -l
   # sonarcloud:
     # name: SonarCloud
     # runs-on: ubuntu-latest
