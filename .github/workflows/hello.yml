@@ -39,9 +39,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: SonarCloud Status
+      - name: SonarCloud_Status
         run: |
-          branch_name = ${GITHUB_REF#refs/heads/}
+          branch_name=${GITHUB_REF#refs/heads/}
           sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
           status=$(echo $sonar_response | jq -r '.projectStatus.status')
           if [ "$status" = "OK" ] || [ "$status" = "WARN" ] ; then
