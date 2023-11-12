@@ -25,7 +25,9 @@ jobs:
           sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
           status=$(echo $sonar_response | jq -r '.status')
           echo $status
-          if [ $status = "SUCCESS" ] || [ $status = "WARN" ] ; then
+          jq --version
+          echo '{"name": "Test", "status": "SUCCESS"}' | jq '.status'
+          if [ "$status" = "SUCCESS" ] || [ "$status" = "WARN" ] ; then
             echo "Analysis completed successfully."
           else
             echo "Analysis failed or status is not successful."
