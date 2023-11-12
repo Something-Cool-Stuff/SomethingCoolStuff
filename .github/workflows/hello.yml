@@ -20,10 +20,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: SonarCloud Status
-        run: sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
-        run: status=$(echo $sonar_response | jq -r '.status')
-        run: if [ "$status" == "SUCCESS" ]; then
-               echo "Analysis completed successfully."
-             else
-               echo "Analysis failed or status is not successful."
-             fi
+        run: |
+          sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
+          status=$(echo $sonar_response | jq -r '.status')
+          if [ "$status" == "SUCCESS" ]; then
+            echo "Analysis completed successfully."
+          else
+            echo "Analysis failed or status is not successful."
+          fi
