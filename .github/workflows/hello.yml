@@ -19,7 +19,8 @@ jobs:
         run: |
           pwd
           ls -l
-          echo 'FROM nginx\nCOPY ./front/index.html /usr/share/nginx/html/index.html' cat > dockerfile
+          echo 'FROM nginx
+          COPY ./front/index.html /usr/share/nginx/html/index.html' cat > dockerfile
           ls -l
           cat dockerfile
   # sonarcloud:
