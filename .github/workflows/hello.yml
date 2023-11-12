@@ -5,7 +5,8 @@ env:
   api_url: "https://sonarcloud.io/api/qualitygates/project_status"
 on: 
   push:
-    branches: [${{env.branch_name}}]
+    branches:
+      - dev
 jobs:
   sonarcloud:
     name: SonarCloud
