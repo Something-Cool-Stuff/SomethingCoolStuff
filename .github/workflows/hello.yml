@@ -1,7 +1,7 @@
 name: Hello
 env:
   project_key: "mcyazvat_SomethingCoolStuff"
-  branch_name: "CI_Hello"
+  branch_name: "dev"
   api_url: "https://sonarcloud.io/api/qualitygates/project_status"
 on: 
   push:
