@@ -22,16 +22,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: SonarCloud Status
         run: |
-          echo "Start"
-          echo $project_key
-          echo $branch_name
-          echo $api_url
           sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
-          echo $sonar_response
-          status=$(echo $sonar_response | jq -r '.status')+
-          echo $status
-          if [ "$status" == "SUCCESS" ]; then
+          status=$(echo $sonar_response | jq -r '.status')
+          if [ "$status" == "SUCCESS" || "$status" == "WARN" ]; then
             echo "Analysis completed successfully."
           else
             echo "Analysis failed or status is not successful."
+            exit 1
           fi
