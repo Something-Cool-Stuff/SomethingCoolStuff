@@ -26,6 +26,8 @@ jobs:
           docker build -t scsnginx:latest .
           ls -l
           docker images
+          docker save scsnginx:latest > scsnginx_latest.tar
+          ls -l
   # sonarcloud:
     # name: SonarCloud
     # runs-on: ubuntu-latest
