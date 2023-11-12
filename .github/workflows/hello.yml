@@ -6,7 +6,7 @@ env:
 on: 
   push:
     branches:
-      - CI_Hello
+      - $branch_name
 jobs:
   sonarcloud:
     name: SonarCloud
