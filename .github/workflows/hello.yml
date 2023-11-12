@@ -2,6 +2,7 @@ name: Hello
 env:
   project_key: "mcyazvat_SomethingCoolStuff"
   branch_name: "CI_Hello"
+  api_url: "https://sonarcloud.io/api/qualitygates/project_status"
 on: 
   push:
     branches:
@@ -22,6 +23,9 @@ jobs:
       - name: SonarCloud Status
         run: |
           echo "Start"
+          echo $project_key
+          echo $branch_name
+          echo $api_url
           sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
           echo $sonar_response
           status=$(echo $sonar_response | jq -r '.status')+
