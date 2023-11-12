@@ -28,5 +28,6 @@ jobs:
             echo "Analysis completed successfully."
           else
             echo "Analysis failed or status is not successful."
+            echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
             exit 1
           fi
