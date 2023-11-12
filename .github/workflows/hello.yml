@@ -22,7 +22,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: SonarCloud Status
         run: |
-          echo ${{branch_name}}
+          echo ${branch_name}
           sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
           status=$(echo $sonar_response | jq -r '.projectStatus.status')
           if [ "$status" = "OK" ] || [ "$status" = "WARN" ] ; then
