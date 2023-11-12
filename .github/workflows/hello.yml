@@ -23,6 +23,7 @@ jobs:
       - name: SonarCloud Status
         run: |
           sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
+          echo $sonar_response
           status=$(echo $sonar_response | jq -r '.status')
           echo $status
           jq --version
