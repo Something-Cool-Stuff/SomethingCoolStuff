@@ -1,12 +1,12 @@
 name: Hello
 env:
   project_key: "mcyazvat_SomethingCoolStuff"
-  branch_name: "CD"
+  branch_name: ${GITHUB_REF#refs/heads/}
   api_url: "https://sonarcloud.io/api/qualitygates/project_status"
 on: 
   push:
     branches:
-      - CD
+      - {{ env.branch_name }}
 jobs:
   CD:
     name: createImageNginx
@@ -28,27 +28,27 @@ jobs:
           docker images
           docker save scsnginx:latest > scsnginx_latest.tar
           ls -l
-  # sonarcloud:
-    # name: SonarCloud
-    # runs-on: ubuntu-latest
-    # steps:
-      # - uses: actions/checkout@v3
-        # with:
-          # fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      # - name: SonarCloud Scan
-        # uses: SonarSource/sonarcloud-github-action@master
-        # env:
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          # SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      # - name: SonarCloud Status
-        # run: |
-          # echo ${branch_name}
-          # sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
-          # status=$(echo $sonar_response | jq -r '.projectStatus.status')
-          # if [ "$status" = "OK" ] || [ "$status" = "WARN" ] ; then
-            # echo "Analysis completed successfully."
-          # else
-            # echo "Analysis failed or status is not successful."
-            # echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
-            # exit 1
-          # fi
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud Status
+        run: |
+          echo ${branch_name}
+          sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
+          status=$(echo $sonar_response | jq -r '.projectStatus.status')
+          if [ "$status" = "OK" ] || [ "$status" = "WARN" ] ; then
+            echo "Analysis completed successfully."
+          else
+            echo "Analysis failed or status is not successful."
+            echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
+            exit 1
+          fi
