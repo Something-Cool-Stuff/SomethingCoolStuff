@@ -46,6 +46,7 @@ jobs:
           status=$(echo $sonar_response | jq -r '.projectStatus.status')
           if [ "$status" = "OK" ] || [ "$status" = "WARN" ] ; then
             echo "Analysis completed successfully."
+            echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
           else
             echo "Analysis failed or status is not successful."
             echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
