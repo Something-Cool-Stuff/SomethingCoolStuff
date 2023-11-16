@@ -27,12 +27,12 @@ jobs:
           docker images
           docker save scsnginx:latest > scsnginx_latest.tar
           ls -l
-    - name: Delivery
-      env: 
-        SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
-      run: |
-        scp -i ${SSH_TO_SCS} /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
-  sonarcloud:0
+      - name: Delivery
+        env: 
+          SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
+        run: |
+          scp -i ${SSH_TO_SCS} /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
+  sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
     needs: CD
