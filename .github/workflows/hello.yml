@@ -30,7 +30,8 @@ jobs:
     - name: Delivery
       env: 
         SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
-      run: scp -i ${SSH_TO_SCS} /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
+      run: |
+        scp -i ${SSH_TO_SCS} /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
   sonarcloud:0
     name: SonarCloud
     runs-on: ubuntu-latest
