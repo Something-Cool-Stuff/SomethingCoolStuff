@@ -31,8 +31,9 @@ jobs:
         env: 
           SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
         run: |
+          echo "$SSH_TO_SCS"
           ls -la /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/
-          scp -i ${SSH_TO_SCS} /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
+          scp -i <(echo "$SSH_TO_SCS") /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
