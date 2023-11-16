@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p /home/runner/.ssh/known_hosts
           chmod 700 /home/runner/.ssh/known_hosts
-          scp -v -i <(echo "$SSH_TO_SCS") /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
+          scp -o StrictHostKeyChecking=no -v -i <(echo "$SSH_TO_SCS") /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
