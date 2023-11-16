@@ -34,8 +34,7 @@ jobs:
           mkdir -p /home/runner/.ssh 
           echo "$SSH_TO_SCS" > /home/runner/.ssh/id_rsa
           chmod 600 /home/runner/.ssh/id_rsa
-          mkdir -p /home/runner/.ssh/known_hosts
-          chmod 700 /home/runner/.ssh/known_hosts
+          ssh-keygen -y -f ~/.ssh/id_rsa
           scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v -i /home/runner/.ssh/id_rsa /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@83.172.42.34:/scs/
   sonarcloud:
     name: SonarCloud
