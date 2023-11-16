@@ -31,8 +31,8 @@ jobs:
         env: 
           SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
         run: |
-          mkdir -p /home/runner/.ssh
-          chmod 700 /home/runner/.ssh
+          mkdir -p /home/runner/.ssh/known_hosts
+          chmod 700 /home/runner/.ssh/known_hosts
           scp -v -i <(echo "$SSH_TO_SCS") /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
   sonarcloud:
     name: SonarCloud
