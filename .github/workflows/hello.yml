@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "$SSH_TO_SCS"
           ls -la /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/
-          scp -i <(echo "$SSH_TO_SCS") /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
+          scp -v -i <(echo "$SSH_TO_SCS") /home/runner/work/SomethingCoolStuff/SomethingCoolStuff/scsnginx_latest.tar scstuff@mcyazva.tplinkdns.com:/scs/
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
