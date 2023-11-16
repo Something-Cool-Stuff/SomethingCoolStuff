@@ -31,7 +31,6 @@ jobs:
         env: 
           SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
         run: |
-          cat /etc/ssh/ssh_config
           mkdir -p /home/runner/.ssh
           echo "$SSH_TO_SCS" > /home/runner/.ssh/id_rsa
           chmod 600 /home/runner/.ssh/id_rsa
