@@ -31,7 +31,6 @@ jobs:
         env: 
           SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
         run: |
-          ls -la /home/runner/.ssh
           ls -la ~/.ssh
           mkdir -p /home/runner/.ssh
           echo "$SSH_TO_SCS" > /home/runner/.ssh/id_rsa
