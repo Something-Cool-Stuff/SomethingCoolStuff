@@ -43,10 +43,12 @@ jobs:
           tar -xzvf front.tar.gz &&
           echo "FROM nginx" > dockerfile &&
           echo "COPY ./front /usr/share/nginx/html" >> dockerfile &&
+          eval $(minikube docker-env) &&
           docker build -t scsnginx:latest . &&
           export DOCKER_IMAGE_NAME="scsnginx:latest" &&
           envsubst < template-nginx-deployment > nginx-deployment.yaml &&
-          kubectl apply -f nginx-deployment.yaml'
+          kubectl apply -f nginx-deployment.yaml &&
+          eval $(docker-machine env -u)'
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
