@@ -42,7 +42,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/runner/.ssh/id_rsa scstuff@83.172.42.34 'cd /scs && 
           tar -xzvf front.tar.gz &&
           echo "FROM nginx
-          COPY ./front /usr/share/nginx/html" > dockerfile'
+          COPY ./front /usr/share/nginx/html" > dockerfile &&
+          docker build -t scsnginx:latest .'
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
