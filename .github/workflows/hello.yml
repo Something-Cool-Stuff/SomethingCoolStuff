@@ -48,7 +48,8 @@ jobs:
           export DOCKER_IMAGE_NAME="scsnginx:latest" &&
           envsubst < template-nginx-deployment > nginx-deployment.yaml &&
           kubectl apply -f nginx-deployment.yaml &&
-          eval $(docker-machine env -u)'
+          eval $(docker-machine env -u) &&
+          kubectl rollout restart deployment nginx-deployment'
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
