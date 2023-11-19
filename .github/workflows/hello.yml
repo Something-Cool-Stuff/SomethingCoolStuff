@@ -39,7 +39,7 @@ jobs:
           scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v -i /home/runner/.ssh/id_rsa front.tar.gz scstuff@83.172.42.34:/scs
       - name: Deploy
         run: 
-          ssh -i /home/runner/.ssh/id_rsa scstuff@83.172.42.34 'cd /scs && 
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v -i /home/runner/.ssh/id_rsa scstuff@83.172.42.34 'cd /scs && 
           tar -xzvf front.tar.gz'
   sonarcloud:
     name: SonarCloud
