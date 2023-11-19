@@ -45,7 +45,8 @@ jobs:
           echo "COPY ./front /usr/share/nginx/html" >> dockerfile &&
           docker build -t scsnginx:latest . &&
           export DOCKER_IMAGE_NAME="scsnginx:latest" &&
-          envsubst < template-nginx-deployment > nginx-deployment.yaml'
+          envsubst < template-nginx-deployment > nginx-deployment.yaml &&
+          kubectl apply -f nginx-deployment.yaml'
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
