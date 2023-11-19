@@ -9,6 +9,8 @@ on:
 jobs:
   CD:
     name: createImageNginx
+    env: 
+      SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,9 +29,7 @@ jobs:
 #          docker images
 #          docker save scsnginx:latest > scsnginx_latest.tar
 #          ls -l
-      - name: Delivery
-        env: 
-          SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
+      - name: Delivery        
         run: |
           mkdir -p /home/runner/.ssh 
           echo "$SSH_TO_SCS" > /home/runner/.ssh/id_rsa
@@ -37,6 +37,10 @@ jobs:
           ssh-keygen -y -f ~/.ssh/id_rsa
           tar -czvf front.tar.gz ./front
           scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -v -i /home/runner/.ssh/id_rsa front.tar.gz scstuff@83.172.42.34:/scs
+      - name: Deploy
+        run: 
+          ssh -i /home/runner/.ssh/id_rsa scstuff@83.172.42.34 'cd /scs && 
+          tar -xzvf front.tar.gz'
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
