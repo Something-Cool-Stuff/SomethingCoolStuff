@@ -17,19 +17,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-#      - name: createImage
-#        run: |
-#          pwd
-#          ls -l
-#          echo 'FROM nginx
-#          COPY ./front/index.html /usr/share/nginx/html/index.html' > dockerfile
-#          ls -l
-#          cat dockerfile
-#          docker build -t scsnginx:latest .
-#          ls -l
-#          docker images
-#          docker save scsnginx:latest > scsnginx_latest.tar
-#          ls -l
       - name: Delivery        
         run: |
           mkdir -p /home/runner/.ssh 
