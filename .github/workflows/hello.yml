@@ -9,7 +9,7 @@ on:
 jobs:
   CD:
     name: createImageNginx
-    needs: SonarCloud
+#    needs: SonarCloud
     env: 
       SSH_TO_SCS: ${{ secrets.SSH_TO_SCS }}
     runs-on: ubuntu-latest
