@@ -27,7 +27,7 @@ jobs:
           scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/runner/.ssh/id_rsa front.tar.gz scstuff@83.172.42.34:/scs
       - name: Deploy
         run: 
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/runner/.ssh/id_rsa scstuff@83.172.42.34 'cd /scs && 
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/runner/.ssh/id_rsa scstuff@83.172.42.34 'cd /scs && echo "TEEESTTTTS" && 
           tar -xzvf front.tar.gz &&
           echo "FROM nginx" > dockerfile &&
           echo "COPY ./front /usr/share/nginx/html" >> dockerfile &&
