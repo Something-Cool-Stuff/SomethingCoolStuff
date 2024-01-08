@@ -37,7 +37,7 @@ jobs:
           echo "text3" &&
           docker build -t scsnginx:latest . &&
           echo "text4" &&
-          export DOCKER_IMAGE_NAME="scsnginx:latest" &&
+          export DOCKER_IMAGE_NAME="nginx:latest" &&
           echo "text5" &&
           envsubst < template-nginx-deployment > nginx-deployment.yaml &&
           echo "text6" &&
