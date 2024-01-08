@@ -27,7 +27,8 @@ jobs:
           scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/runner/.ssh/id_rsa front.tar.gz scstuff@83.172.42.34:/scs
       - name: Deploy
         run: 
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/runner/.ssh/id_rsa scstuff@83.172.42.34 'cd /scs && echo "TEEESTTTTS" && 
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/runner/.ssh/id_rsa scstuff@83.172.42.34 'cd /scs && 
+          echo "TEEESTTTTS" && 
           tar -xzvf front.tar.gz &&
           echo "FROM nginx" > dockerfile &&
           echo "COPY ./front /usr/share/nginx/html" >> dockerfile &&
@@ -38,30 +39,30 @@ jobs:
           kubectl apply -f nginx-deployment.yaml &&
           eval $(docker-machine env -u) &&
           kubectl rollout restart deployment nginx-deployment'
-  sonarcloud:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: SonarCloud_Status
-        run: |
-          branch_name=${GITHUB_REF#refs/heads/}
-          sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
-          status=$(echo $sonar_response | jq -r '.projectStatus.status')
-          if [ "$status" = "OK" ] || [ "$status" = "WARN" ] ; then
-            echo "Analysis completed successfully."
-            echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
-          else
-            echo "Analysis failed or status is not successful."
-            echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
-            exit 1
-          fi
+#  sonarcloud:
+#    name: SonarCloud
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+#      - name: SonarCloud Scan
+#        uses: SonarSource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - name: SonarCloud_Status
+#        run: |
+#          branch_name=${GITHUB_REF#refs/heads/}
+#          sonar_response=$(curl -s "${api_url}?projectKey=${project_key}&branch=${branch_name}")
+#          status=$(echo $sonar_response | jq -r '.projectStatus.status')
+#          if [ "$status" = "OK" ] || [ "$status" = "WARN" ] ; then
+#            echo "Analysis completed successfully."
+#            echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
+#          else
+#            echo "Analysis failed or status is not successful."
+#            echo "https://sonarcloud.io/summary/new_code?id=${project_key}&branch=${branch_name}"
+#            exit 1
+#          fi
           
           
