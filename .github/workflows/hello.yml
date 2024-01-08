@@ -35,7 +35,7 @@ jobs:
           echo "text2" &&
           eval $(minikube docker-env) &&
           echo "text3" &&
-          docker build -t scsnginx:latest . &&
+          docker build -t nginx:latest . &&
           echo "text4" &&
           export DOCKER_IMAGE_NAME="nginx:latest" &&
           echo "text5" &&
@@ -45,7 +45,7 @@ jobs:
           echo "text7" &&
           eval $(docker-machine env -u) &&
           echo "text8" &&
-          kubectl rollout restart deployment nginx-deployment'
+          kubectl rollout restart deployment nginx-deployment's
 #  sonarcloud:
 #    name: SonarCloud
 #    runs-on: ubuntu-latest
